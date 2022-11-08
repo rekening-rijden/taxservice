@@ -13,14 +13,14 @@ public class BasePriceDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private BigDecimal kilometerTax;
-    private String carType;
+    private String engineType;
 
     public BasePriceDto() {}
 
-    public BasePriceDto(Long id, BigDecimal kilometerTax, String carType) {
+    public BasePriceDto(Long id, BigDecimal kilometerTax, String engineType) {
         this.id = id;
         this.kilometerTax = kilometerTax;
-        this.carType = carType;
+        this.engineType = engineType;
     }
 
     public Long getId() {
@@ -39,11 +39,11 @@ public class BasePriceDto {
         this.kilometerTax = kilometerTax;
     }
 
-    public String getCarType() {
-        return carType;
+    public String getEngineType() {
+        return engineType;
     }
 
-    public void setCarType(String carType) {
-        this.carType = carType;
+    public void setEngineType(String engineType) {
+        this.engineType = engineType;
     }
 }

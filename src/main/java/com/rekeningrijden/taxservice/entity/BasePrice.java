@@ -6,14 +6,14 @@ public class BasePrice {
 
     private Long id;
     private BigDecimal kilometerTax;
-    private String carType;
+    private String engineType;
 
     public BasePrice() {}
 
-    public BasePrice(Long id, BigDecimal kilometerTax, String carType) {
+    public BasePrice(Long id, BigDecimal kilometerTax, String engineType) {
         this.id = id;
         this.kilometerTax = kilometerTax;
-        this.carType = carType;
+        this.engineType = engineType;
     }
 
     public Long getId() {
@@ -32,11 +32,11 @@ public class BasePrice {
         this.kilometerTax = kilometerTax;
     }
 
-    public String getCarType() {
-        return carType;
+    public String getEngineType() {
+        return engineType;
     }
 
-    public void setCarType(String carType) {
-        this.carType = carType;
+    public void setEngineType(String engineType) {
+        this.engineType = engineType;
     }
 }
