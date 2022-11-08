@@ -1,9 +1,16 @@
 package com.rekeningrijden.taxservice.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
+@Entity(name = "BasePrice")
 public class BasePrice {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private BigDecimal kilometerTax;
     private String engineType;

@@ -1,8 +1,8 @@
 package com.rekeningrijden.taxservice.service;
 
 import com.rekeningrijden.taxservice.abstraction.BasePriceServiceable;
-import com.rekeningrijden.taxservice.dto.BasePriceDto;
 import com.rekeningrijden.taxservice.entity.BasePrice;
+import com.rekeningrijden.taxservice.dto.BasePriceDto;
 import com.rekeningrijden.taxservice.repository.BasePriceRepository;
 import com.rekeningrijden.taxservice.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +22,17 @@ public class BasePriceService implements BasePriceServiceable {
     }
 
     @Override
-    public void saveBasePrice(BasePrice basePrice) {
-        basePriceRepo.save(ObjectMapperUtils.map(basePrice, BasePriceDto.class));
+    public void saveBasePrice(BasePriceDto basePriceDto) {
+        basePriceRepo.save(ObjectMapperUtils.map(basePriceDto, BasePrice.class));
     }
 
     @Override
-    public List<BasePrice> getBasePrices() {
-        return ObjectMapperUtils.mapAll(basePriceRepo.findAll(), BasePrice.class);
+    public List<BasePriceDto> getBasePrices() {
+        return ObjectMapperUtils.mapAll(basePriceRepo.findAll(), BasePriceDto.class);
     }
 
     @Override
-    public BigDecimal getKilometerTaxForEngineType(String engineType) {
+    public BigDecimal getKilometerTaxByEngineType(String engineType) {
         return basePriceRepo.findByEngineType(engineType).getKilometerTax();
     }
 

@@ -1,11 +1,18 @@
 package com.rekeningrijden.taxservice.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Entity(name = "TimeTax")
 public class TimeTax {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private BigDecimal surTax;
     private LocalTime startTime;

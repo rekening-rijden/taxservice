@@ -1,7 +1,7 @@
 package com.rekeningrijden.taxservice.repository;
 
-import com.rekeningrijden.taxservice.dto.RoadTaxDto;
+import com.rekeningrijden.taxservice.entity.RoadTax;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoadTaxRepository extends JpaRepository<RoadTaxDto, Long> {
+public interface RoadTaxRepository extends JpaRepository<RoadTax, Long> {
 }
