@@ -36,4 +36,14 @@ public class BasePriceService implements BasePriceServiceable {
         return basePriceRepo.findByEngineType(engineType).getKilometerTax();
     }
 
+    @Override
+    public BasePriceDto updateBasePrice(BasePriceDto basePriceDto) {
+        return ObjectMapperUtils.map(basePriceRepo.save(ObjectMapperUtils.map(basePriceDto, BasePrice.class)), BasePriceDto.class);
+    }
+
+    @Override
+    public void deleteBasePrice(BasePriceDto basePriceDto) {
+        basePriceRepo.delete(ObjectMapperUtils.map(basePriceDto, BasePrice.class));
+    }
+
 }

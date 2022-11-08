@@ -1,9 +1,12 @@
 package com.rekeningrijden.taxservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 public class RoadTaxDto {
 
+    @JsonIgnore
     private Long id;
     private BigDecimal surTax;
     private String roadTax;

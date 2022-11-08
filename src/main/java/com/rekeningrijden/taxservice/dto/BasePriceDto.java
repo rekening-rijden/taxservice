@@ -4,24 +4,14 @@ import java.math.BigDecimal;
 
 public class BasePriceDto {
 
-    private Long id;
     private BigDecimal kilometerTax;
     private String engineType;
 
     public BasePriceDto() {}
 
-    public BasePriceDto(Long id, BigDecimal kilometerTax, String engineType) {
-        this.id = id;
+    public BasePriceDto(BigDecimal kilometerTax, String engineType) {
         this.kilometerTax = kilometerTax;
         this.engineType = engineType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public BigDecimal getKilometerTax() {

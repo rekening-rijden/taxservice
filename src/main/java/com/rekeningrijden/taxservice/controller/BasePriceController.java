@@ -42,4 +42,18 @@ public class BasePriceController {
         return new ResponseEntity<>("Baseprice saved", HttpStatus.OK);
     }
 
+    @PutMapping
+    public @ResponseBody ResponseEntity<BasePriceDto> putBasePrice(@RequestBody BasePriceDto basePriceDto){
+        return new ResponseEntity<>(basePriceService.updateBasePrice(basePriceDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public @ResponseBody ResponseEntity<String> deleteBasePrice(@RequestBody BasePriceDto basePriceDto){
+        try {
+            basePriceService.deleteBasePrice(basePriceDto);
+        }catch (Exception e){
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("Baseprice deleted", HttpStatus.OK);
+    }
 }
