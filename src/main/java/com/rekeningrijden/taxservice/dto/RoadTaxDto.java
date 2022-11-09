@@ -1,30 +1,17 @@
 package com.rekeningrijden.taxservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.math.BigDecimal;
 
 public class RoadTaxDto {
 
-    @JsonIgnore
-    private Long id;
     private BigDecimal surTax;
-    private String roadTax;
+    private String roadType;
 
     public RoadTaxDto() {}
 
-    public RoadTaxDto(Long id, BigDecimal surTax, String roadTax) {
-        this.id = id;
+    public RoadTaxDto(BigDecimal surTax, String roadType) {
         this.surTax = surTax;
-        this.roadTax = roadTax;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.roadType = roadType;
     }
 
     public BigDecimal getSurTax() {
@@ -35,11 +22,11 @@ public class RoadTaxDto {
         this.surTax = surTax;
     }
 
-    public String getRoadTax() {
-        return roadTax;
+    public String getRoadType() {
+        return roadType;
     }
 
-    public void setRoadTax(String roadTax) {
-        this.roadTax = roadTax;
+    public void setRoadType(String roadType) {
+        this.roadType = roadType;
     }
 }
