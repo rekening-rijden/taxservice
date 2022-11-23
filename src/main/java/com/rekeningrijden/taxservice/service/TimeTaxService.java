@@ -33,9 +33,9 @@ public class TimeTaxService implements TimeTaxServiceable {
     }
 
     @Override
-    public BigDecimal getSurTaxByDateTime(LocalTime startTime, LocalTime endTime) {
+    public BigDecimal getSurTaxByDateTimeAndDayOfWeek(LocalTime time, int dayOfWeek) {
 
-        return null;
+        return ;
     }
 
     @Override

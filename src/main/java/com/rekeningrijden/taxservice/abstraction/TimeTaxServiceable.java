@@ -9,7 +9,7 @@ import java.util.List;
 public interface TimeTaxServiceable {
     void saveTimeTax(TimeTaxDto timeTaxDto);
     List<TimeTaxDto> getTimeTaxes();
-    BigDecimal getSurTaxByDateTime(LocalTime startTime, LocalTime endTime);
+    BigDecimal getSurTaxByDateTimeAndDayOfWeek(LocalTime startTime, LocalTime endTime, int dayOfWeek);
     TimeTaxDto updateTimeTax(TimeTaxDto timeTaxDto);
     void deleteTimeTax(TimeTaxDto timeTaxDto);
 }
