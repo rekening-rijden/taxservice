@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TimeTaxService implements TimeTaxServiceable {
@@ -23,29 +24,37 @@ public class TimeTaxService implements TimeTaxServiceable {
     }
 
     @Override
-    public void saveTimeTax(TimeTaxDto timeTaxDto) {
-        timeTaxRepo.save(ObjectMapperUtils.map(timeTaxDto, TimeTax.class));
-    }
-
-    @Override
     public List<TimeTaxDto> getTimeTaxes() {
         return ObjectMapperUtils.mapAll(timeTaxRepo.findAll(), TimeTaxDto.class);
     }
 
     @Override
-    public BigDecimal getSurTaxByDateTimeAndDayOfWeek(LocalTime time, int dayOfWeek) {
-
-        return ;
+    public BigDecimal getSurTaxByDateTimeAndDayOfWeek(LocalTime startTime, LocalTime endTime, int dayOfWeek) {
+        return null;
     }
 
     @Override
+    public List<TimeTaxDto> getSurTaxByDayOfWeek(List<Integer> daysOfWeek) {
+        return ObjectMapperUtils.mapAll(this.timeTaxRepo.findAllByDaysOfWeek(daysOfWeek), TimeTaxDto.class);
+    }
+
+
+    @Override
     public TimeTaxDto updateTimeTax(TimeTaxDto timeTaxDto) {
-        return ObjectMapperUtils.map(timeTaxRepo.save(ObjectMapperUtils.map(timeTaxDto, TimeTax.class)), TimeTaxDto.class);
+        // update time tax
+        return timeTaxRepo.findById(timeTaxDto.getId()).map(timeTax -> {
+            timeTax.setSurTax(timeTaxDto.getSurTax());
+            return ObjectMapperUtils.map(timeTaxRepo.save(timeTax), TimeTaxDto.class);
+        })
+                .orElseGet(() -> {
+                    TimeTax timeTax = ObjectMapperUtils.map(timeTaxDto, TimeTax.class);
+                    return ObjectMapperUtils.map(timeTaxRepo.save(timeTax), TimeTaxDto.class);
+                });
+
     }
 
     @Override
     public void deleteTimeTax(TimeTaxDto timeTaxDto) {
         timeTaxRepo.delete(ObjectMapperUtils.map(timeTaxDto, TimeTax.class));
     }
-
 }

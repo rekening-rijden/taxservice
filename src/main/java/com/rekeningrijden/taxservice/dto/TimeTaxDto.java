@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 public class TimeTaxDto {
 
-    @JsonIgnore
+
     private Long id;
     private BigDecimal surTax;
     private LocalTime startTime;
