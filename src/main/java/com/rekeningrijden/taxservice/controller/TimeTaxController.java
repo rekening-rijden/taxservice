@@ -28,7 +28,7 @@ public class TimeTaxController {
     }
 
     @PutMapping
-    public ResponseEntity<?> updateTimeTax(TimeTaxDto timeTaxDto) {
+    public @ResponseBody ResponseEntity<?> updateTimeTax(@RequestBody TimeTaxDto timeTaxDto) {
         System.out.println("Put time tax");
         return new ResponseEntity<>(timeTaxService.updateTimeTax(timeTaxDto), HttpStatus.OK);
     }

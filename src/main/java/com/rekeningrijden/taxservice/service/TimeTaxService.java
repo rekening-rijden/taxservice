@@ -42,15 +42,12 @@ public class TimeTaxService implements TimeTaxServiceable {
     @Override
     public TimeTaxDto updateTimeTax(TimeTaxDto timeTaxDto) {
         // update time tax
-        return timeTaxRepo.findById(timeTaxDto.getId()).map(timeTax -> {
-            timeTax.setSurTax(timeTaxDto.getSurTax());
-            return ObjectMapperUtils.map(timeTaxRepo.save(timeTax), TimeTaxDto.class);
-        })
-                .orElseGet(() -> {
-                    TimeTax timeTax = ObjectMapperUtils.map(timeTaxDto, TimeTax.class);
-                    return ObjectMapperUtils.map(timeTaxRepo.save(timeTax), TimeTaxDto.class);
-                });
-
+        Optional<TimeTax> timeTax = this.timeTaxRepo.findById(timeTaxDto.getId());
+        if (timeTax.isPresent()) {
+            timeTax.get().setSurTax(timeTaxDto.getSurTax());
+            this.timeTaxRepo.save(timeTax.get());
+        }
+        return ObjectMapperUtils.map(timeTax.get(), TimeTaxDto.class);
     }
 
     @Override
