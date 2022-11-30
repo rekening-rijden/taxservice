@@ -4,22 +4,22 @@ import java.math.BigDecimal;
 
 public class BasePriceDto {
 
-    private BigDecimal kilometerTax;
+    private BigDecimal surTax;
     private String engineType;
 
     public BasePriceDto() {}
 
     public BasePriceDto(BigDecimal kilometerTax, String engineType) {
-        this.kilometerTax = kilometerTax;
+        this.surTax = kilometerTax;
         this.engineType = engineType;
     }
 
-    public BigDecimal getKilometerTax() {
-        return kilometerTax;
+    public BigDecimal getSurTax() {
+        return surTax;
     }
 
-    public void setKilometerTax(BigDecimal kilometerTax) {
-        this.kilometerTax = kilometerTax;
+    public void setSurTax(BigDecimal surTax) {
+        this.surTax = surTax;
     }
 
     public String getEngineType() {

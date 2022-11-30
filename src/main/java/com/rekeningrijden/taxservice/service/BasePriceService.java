@@ -33,7 +33,7 @@ public class BasePriceService implements BasePriceServiceable {
 
     @Override
     public BigDecimal getKilometerTaxByEngineType(String engineType) {
-        return basePriceRepo.findByEngineType(engineType).getKilometerTax();
+        return basePriceRepo.findByEngineType(engineType).getSurTax();
     }
 
     @Override

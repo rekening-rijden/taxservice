@@ -1,10 +1,13 @@
 package com.rekeningrijden.taxservice.entity;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@Entity(name = "RoadTax")
+@Entity(name = "ROADTAX")
+@Data
 public class RoadTax {
 
     @Id
