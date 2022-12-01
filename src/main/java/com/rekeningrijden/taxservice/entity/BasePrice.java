@@ -1,28 +1,31 @@
 package com.rekeningrijden.taxservice.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity(name = "BasePrice")
+@Entity(name = "BASEPRICE")
+@Data
 public class BasePrice {
 
     @Id
     private String engineType;
-    private BigDecimal kilometerTax;
+    private BigDecimal surTax;
 
     public BasePrice() {}
 
     public BasePrice(BigDecimal kilometerTax, String engineType) {
-        this.kilometerTax = kilometerTax;
+        this.surTax = kilometerTax;
         this.engineType = engineType;
     }
 
-    public BigDecimal getKilometerTax() {
-        return kilometerTax;
+    public BigDecimal getSurTax() {
+        return surTax;
     }
 
-    public void setKilometerTax(BigDecimal kilometerTax) {
-        this.kilometerTax = kilometerTax;
+    public void setSurTax(BigDecimal kilometerTax) {
+        this.surTax = kilometerTax;
     }
 
     public String getEngineType() {
