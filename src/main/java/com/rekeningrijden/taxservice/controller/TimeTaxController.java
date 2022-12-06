@@ -22,6 +22,11 @@ public class TimeTaxController {
         this.timeTaxService = timeTaxService;
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<TimeTaxDto>> getTimeTaxes() {
+        return new ResponseEntity<>(timeTaxService.getTimeTaxes(), HttpStatus.OK);
+    }
+
     @GetMapping(params = "daysofweek")
     public @ResponseBody ResponseEntity<List<TimeTaxDto>> getSurTaxByDaysOfWeek(@RequestParam List<Integer> daysofweek) {
         return new ResponseEntity<>(timeTaxService.getSurTaxByDayOfWeek(daysofweek), HttpStatus.OK);
