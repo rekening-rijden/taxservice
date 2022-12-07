@@ -3,6 +3,7 @@ package com.rekeningrijden.taxservice.service;
 import com.rekeningrijden.taxservice.abstraction.BasePriceServiceable;
 import com.rekeningrijden.taxservice.entity.BasePrice;
 import com.rekeningrijden.taxservice.dto.BasePriceDto;
+import com.rekeningrijden.taxservice.publisher.UpdateTaxConfigProducer;
 import com.rekeningrijden.taxservice.repository.BasePriceRepository;
 import com.rekeningrijden.taxservice.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import java.util.List;
 public class BasePriceService implements BasePriceServiceable {
 
     private final BasePriceRepository basePriceRepo;
+    private UpdateTaxConfigProducer producer;
 
     @Autowired
-    public BasePriceService(BasePriceRepository basePriceRepo) {
+    public BasePriceService(BasePriceRepository basePriceRepo, UpdateTaxConfigProducer producer) {
         this.basePriceRepo = basePriceRepo;
+        this.producer = producer;
     }
 
     @Override
@@ -38,12 +41,14 @@ public class BasePriceService implements BasePriceServiceable {
 
     @Override
     public BasePriceDto updateBasePrice(BasePriceDto basePriceDto) {
-        return ObjectMapperUtils.map(basePriceRepo.save(ObjectMapperUtils.map(basePriceDto, BasePrice.class)), BasePriceDto.class);
+        BasePriceDto response = ObjectMapperUtils.map(basePriceRepo.save(ObjectMapperUtils.map(basePriceDto, BasePrice.class)), BasePriceDto.class);
+        producer.sendMessage(basePriceDto);
+        return response;
     }
 
     @Override
-    public void deleteBasePrice(BasePriceDto basePriceDto) {
-        basePriceRepo.delete(ObjectMapperUtils.map(basePriceDto, BasePrice.class));
+    public void deleteBasePriceByEngineType(String engineType) {
+        basePriceRepo.delete(ObjectMapperUtils.map(engineType, BasePrice.class));
     }
 
 }

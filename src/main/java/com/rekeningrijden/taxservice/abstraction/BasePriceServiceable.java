@@ -10,5 +10,5 @@ public interface BasePriceServiceable {
     List<BasePriceDto> getBasePrices();
     BigDecimal getKilometerTaxByEngineType(String engineType);
     BasePriceDto updateBasePrice(BasePriceDto basePriceDto);
-    void deleteBasePrice(BasePriceDto basePriceDto);
+    void deleteBasePriceByEngineType(String engineType);
 }

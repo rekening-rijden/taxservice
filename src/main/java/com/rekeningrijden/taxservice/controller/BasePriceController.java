@@ -50,15 +50,17 @@ public class BasePriceController {
     }
 
     @PutMapping
-    public @ResponseBody ResponseEntity<BasePriceDto> putBasePrice(@RequestBody BasePriceDto basePriceDto){
+    @ResponseBody
+    public ResponseEntity<BasePriceDto> putBasePrice(@RequestBody BasePriceDto basePriceDto){
         logger.info("Put baseprice");
         return new ResponseEntity<>(basePriceService.updateBasePrice(basePriceDto), HttpStatus.OK);
     }
 
     @DeleteMapping
-    public @ResponseBody ResponseEntity<String> deleteBasePrice(@RequestBody BasePriceDto basePriceDto){
+    @ResponseBody
+    public ResponseEntity<String> deleteBasePrice(@RequestParam String engineType){
         try {
-            basePriceService.deleteBasePrice(basePriceDto);
+            basePriceService.deleteBasePriceByEngineType(engineType);
         }catch (Exception e){
             logger.error("Delete baseprice encountered exception: " + e.getMessage());
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
