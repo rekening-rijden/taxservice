@@ -2,13 +2,11 @@ package com.rekeningrijden.taxservice.controller;
 
 import com.rekeningrijden.taxservice.abstraction.TimeTaxServiceable;
 import com.rekeningrijden.taxservice.dto.TimeTaxDto;
-import com.rekeningrijden.taxservice.entity.TimeTax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController

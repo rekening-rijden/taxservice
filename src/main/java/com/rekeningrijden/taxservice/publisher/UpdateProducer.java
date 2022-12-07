@@ -3,8 +3,8 @@ package com.rekeningrijden.taxservice.publisher;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rekeningrijden.taxservice.dto.BasePriceDto;
+import com.rekeningrijden.taxservice.dto.RoadTaxDto;
 import com.rekeningrijden.taxservice.dto.TimeTaxDto;
-import com.rekeningrijden.taxservice.entity.RoadTax;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdateTaxConfigProducer {
+public class UpdateProducer {
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -28,11 +28,11 @@ public class UpdateTaxConfigProducer {
     @Value("${rabbitmq.routing.timetax.update.key}")
     private String timeTaxRoutingKey;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateTaxConfigProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateProducer.class);
 
     private RabbitTemplate rabbitTemplate;
 
-    public UpdateTaxConfigProducer(RabbitTemplate rabbitTemplate) {
+    public UpdateProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
@@ -45,7 +45,7 @@ public class UpdateTaxConfigProducer {
         }
     }
 
-    public void sendMessage(RoadTax roadTaxDto) {
+    public void sendMessage(RoadTaxDto roadTaxDto) {
         try{
             String message = mapper.writeValueAsString(roadTaxDto);
             rabbitTemplate.convertAndSend(exchange, roadTaxRoutingKey, message);

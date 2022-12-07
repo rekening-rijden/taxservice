@@ -15,40 +15,90 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
-    @Value("${rabbitmq.queue.create.name}")
-    private String createQueue;
+    @Value("${rabbitmq.queue.baseprice.create.name}")
+    private String createBasePriceQueue;
 
-    @Value("${rabbitmq.queue.update.name}")
-    private String updateQueue;
+    @Value("${rabbitmq.queue.baseprice.update.name}")
+    private String updateBasePriceQueue;
 
-    @Value("${rabbitmq.queue.delete.name}")
-    private String deleteQueue;
+    @Value("${rabbitmq.queue.baseprice.delete.name}")
+    private String deleteBasePriceQueue;
 
-    @Value("${rabbitmq.routing.create.key}")
-    private String createKey;
+    @Value("${rabbitmq.queue.roadtax.create.name}")
+    private String createRoadTaxQueue;
 
-    @Value("${rabbitmq.routing.update.key}")
-    private String updateKey;
+    @Value("${rabbitmq.queue.roadtax.update.name}")
+    private String updateRoadTaxQueue;
 
-    @Value("${rabbitmq.routing.delete.key}")
-    private String deleteKey;
+    @Value("${rabbitmq.queue.roadtax.delete.name}")
+    private String deleteRoadTaxQueue;
+
+
+    @Value("${rabbitmq.routing.baseprice.create.key}")
+    private String createBasePriceKey;
+
+    @Value("${rabbitmq.routing.baseprice.update.key}")
+    private String updateBasePriceKey;
+
+    @Value("${rabbitmq.routing.baseprice.delete.key}")
+    private String deleteBasePriceKey;
+
+    @Value("${rabbitmq.routing.roadtax.create.key}")
+    private String createRoadTaxKey;
+
+    @Value("${rabbitmq.routing.roadtax.update.key}")
+    private String updateRoadTaxKey;
+
+    @Value("${rabbitmq.routing.roadtax.delete.key}")
+    private String deleteRoadTaxKey;
+
+
+    @Value("${rabbitmq.queue.timetax.update.name}")
+    private String updateTimeTaxQueue;
+
+    @Value("${rabbitmq.routing.timetax.update.key}")
+    private String updateTimeTaxKey;
 
     // spring bean for create queue
     @Bean
-    public Queue createQueue(){
-        return new Queue(createQueue);
+    public Queue createBasePriceQueue(){
+        return new Queue(createBasePriceQueue);
+    }
+
+    // spring bean for create queue
+    @Bean
+    public Queue createRoadTaxQueue(){
+        return new Queue(createRoadTaxQueue);
     }
 
     // spring bean for update queue
     @Bean
-    public Queue updateQueue(){
-        return new Queue(updateQueue);
+    public Queue updateBasePriceQueue(){
+        return new Queue(updateBasePriceQueue);
+    }
+
+    // spring bean for update queue
+    @Bean
+    public Queue updateRoadTaxQueue(){
+        return new Queue(updateRoadTaxQueue);
+    }
+
+    // spring bean for update queue
+    @Bean
+    public Queue updateTimeTaxQueue(){
+        return new Queue(updateTimeTaxQueue);
     }
 
     // spring bean for delete queue
     @Bean
-    public Queue deleteQueue(){
-        return new Queue(deleteQueue);
+    public Queue deleteBasePriceQueue(){
+        return new Queue(deleteBasePriceQueue);
+    }
+
+    // spring bean for delete queue
+    @Bean
+    public Queue deleteRoadTaxQueue(){
+        return new Queue(deleteRoadTaxQueue);
     }
 
     // spring bean for rabbitmq exchange
@@ -59,29 +109,64 @@ public class RabbitMQConfig {
 
     // binding between create queue and exchange using routing key
     @Bean
-    public Binding createBinding(){
+    public Binding createBasePriceBinding(){
         return BindingBuilder
-                .bind(createQueue())
+                .bind(createBasePriceQueue())
                 .to(exchange())
-                .with(createKey);
+                .with(createBasePriceKey);
     }
 
     // binding between update queue and exchange using routing key
     @Bean
-    public Binding updateBinding(){
+    public Binding updateBasePriceBinding(){
         return BindingBuilder
-                .bind(updateQueue())
+                .bind(updateBasePriceQueue())
                 .to(exchange())
-                .with(updateKey);
+                .with(updateBasePriceKey);
     }
 
     // binding between delete queue and exchange using routing key
     @Bean
-    public Binding deleteBinding(){
+    public Binding deleteBasePriceBinding(){
         return BindingBuilder
-                .bind(updateQueue())
+                .bind(deleteBasePriceQueue())
                 .to(exchange())
-                .with(deleteKey);
+                .with(deleteBasePriceKey);
+    }
+
+    @Bean
+    public Binding createRoadTaxBinding(){
+        return BindingBuilder
+                .bind(createRoadTaxQueue())
+                .to(exchange())
+                .with(createRoadTaxKey);
+    }
+
+    // binding between update queue and exchange using routing key
+    @Bean
+    public Binding updateRoadTaxBinding(){
+        return BindingBuilder
+                .bind(updateRoadTaxQueue())
+                .to(exchange())
+                .with(updateRoadTaxKey);
+    }
+
+    // binding between delete queue and exchange using routing key
+    @Bean
+    public Binding deleteRoadTaxBinding(){
+        return BindingBuilder
+                .bind(deleteRoadTaxQueue())
+                .to(exchange())
+                .with(deleteRoadTaxKey);
+    }
+
+    // binding between delete queue and exchange using routing key
+    @Bean
+    public Binding updateTimeTaxBinding(){
+        return BindingBuilder
+                .bind(updateTimeTaxQueue())
+                .to(exchange())
+                .with(updateTimeTaxKey);
     }
 
     @Bean

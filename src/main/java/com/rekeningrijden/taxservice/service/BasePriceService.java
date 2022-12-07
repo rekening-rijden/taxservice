@@ -3,7 +3,7 @@ package com.rekeningrijden.taxservice.service;
 import com.rekeningrijden.taxservice.abstraction.BasePriceServiceable;
 import com.rekeningrijden.taxservice.entity.BasePrice;
 import com.rekeningrijden.taxservice.dto.BasePriceDto;
-import com.rekeningrijden.taxservice.publisher.UpdateTaxConfigProducer;
+import com.rekeningrijden.taxservice.publisher.UpdateProducer;
 import com.rekeningrijden.taxservice.repository.BasePriceRepository;
 import com.rekeningrijden.taxservice.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ import java.util.List;
 public class BasePriceService implements BasePriceServiceable {
 
     private final BasePriceRepository basePriceRepo;
-    private UpdateTaxConfigProducer producer;
+    private UpdateProducer producer;
 
     @Autowired
-    public BasePriceService(BasePriceRepository basePriceRepo, UpdateTaxConfigProducer producer) {
+    public BasePriceService(BasePriceRepository basePriceRepo, UpdateProducer producer) {
         this.basePriceRepo = basePriceRepo;
         this.producer = producer;
     }

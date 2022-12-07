@@ -3,6 +3,7 @@ package com.rekeningrijden.taxservice.service;
 import com.rekeningrijden.taxservice.abstraction.RoadTaxServiceable;
 import com.rekeningrijden.taxservice.dto.RoadTaxDto;
 import com.rekeningrijden.taxservice.entity.RoadTax;
+import com.rekeningrijden.taxservice.publisher.UpdateProducer;
 import com.rekeningrijden.taxservice.repository.RoadTaxRepository;
 import com.rekeningrijden.taxservice.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import java.util.List;
 public class RoadTaxService implements RoadTaxServiceable {
 
     private final RoadTaxRepository roadTaxRepo;
+    private UpdateProducer producer;
 
     @Autowired
-    public RoadTaxService(RoadTaxRepository roadTaxRepo) {
+    public RoadTaxService(RoadTaxRepository roadTaxRepo, UpdateProducer producer) {
         this.roadTaxRepo = roadTaxRepo;
+        this.producer = producer;
     }
 
     @Override
@@ -38,7 +41,9 @@ public class RoadTaxService implements RoadTaxServiceable {
 
     @Override
     public RoadTaxDto updateRoadTax(RoadTaxDto roadTaxDto) {
-        return ObjectMapperUtils.map(roadTaxRepo.save(ObjectMapperUtils.map(roadTaxDto, RoadTax.class)), RoadTaxDto.class);
+        RoadTaxDto response = ObjectMapperUtils.map(roadTaxRepo.save(ObjectMapperUtils.map(roadTaxDto, RoadTax.class)), RoadTaxDto.class);
+        this.producer.sendMessage(roadTaxDto);
+        return response;
     }
 
     @Override

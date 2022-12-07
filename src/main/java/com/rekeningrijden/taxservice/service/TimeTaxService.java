@@ -3,6 +3,7 @@ package com.rekeningrijden.taxservice.service;
 import com.rekeningrijden.taxservice.abstraction.TimeTaxServiceable;
 import com.rekeningrijden.taxservice.dto.TimeTaxDto;
 import com.rekeningrijden.taxservice.entity.TimeTax;
+import com.rekeningrijden.taxservice.publisher.UpdateProducer;
 import com.rekeningrijden.taxservice.repository.TimeTaxRepository;
 import com.rekeningrijden.taxservice.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,12 @@ import java.util.Optional;
 public class TimeTaxService implements TimeTaxServiceable {
 
     private final TimeTaxRepository timeTaxRepo;
+    private UpdateProducer producer;
 
     @Autowired
-    public TimeTaxService(TimeTaxRepository timeTaxRepo) {
+    public TimeTaxService(TimeTaxRepository timeTaxRepo, UpdateProducer producer) {
         this.timeTaxRepo = timeTaxRepo;
+        this.producer = producer;
     }
 
     @Override
@@ -46,6 +49,7 @@ public class TimeTaxService implements TimeTaxServiceable {
         if (timeTax.isPresent()) {
             timeTax.get().setSurTax(timeTaxDto.getSurTax());
             this.timeTaxRepo.save(timeTax.get());
+            this.producer.sendMessage(timeTaxDto);
         }
         return ObjectMapperUtils.map(timeTax.get(), TimeTaxDto.class);
     }
