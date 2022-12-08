@@ -38,15 +38,15 @@ public class BasePriceController {
     }
 
     @PostMapping
-    public @ResponseBody ResponseEntity<String> postBasePrice(@RequestBody BasePriceDto basePriceDto){
+    public @ResponseBody ResponseEntity<BasePriceDto> postBasePrice(@RequestBody BasePriceDto basePriceDto){
         try {
             logger.info("Post baseprice for object: " + basePriceDto.toString());
             basePriceService.saveBasePrice(basePriceDto);
         }catch (Exception e){
             logger.error("Post baseprice encountered exception: " + e.getMessage());
-            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(basePriceDto, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("Baseprice saved", HttpStatus.OK);
+        return new ResponseEntity<>(basePriceDto, HttpStatus.OK);
     }
 
     @PutMapping
