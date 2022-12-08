@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping(path="/baseprice")
+@CrossOrigin(origins = "*")
 public class BasePriceController {
 
     private final BasePriceServiceable basePriceService;
@@ -50,21 +50,20 @@ public class BasePriceController {
     }
 
     @PutMapping
-    @ResponseBody
-    public ResponseEntity<BasePriceDto> putBasePrice(@RequestBody BasePriceDto basePriceDto){
+    public @ResponseBody ResponseEntity<BasePriceDto> putBasePrice(@RequestBody BasePriceDto basePriceDto){
         logger.info("Put baseprice");
         return new ResponseEntity<>(basePriceService.updateBasePrice(basePriceDto), HttpStatus.OK);
     }
 
     @DeleteMapping
-    @ResponseBody
-    public ResponseEntity<String> deleteBasePrice(@RequestParam String engineType){
+    public @ResponseBody ResponseEntity<HttpStatus> deleteBasePrice(@RequestParam String engineType){
         try {
+            System.out.println(engineType);
             basePriceService.deleteBasePriceByEngineType(engineType);
         }catch (Exception e){
             logger.error("Delete baseprice encountered exception: " + e.getMessage());
-            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("Baseprice deleted", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

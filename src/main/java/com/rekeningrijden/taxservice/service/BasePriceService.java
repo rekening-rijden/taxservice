@@ -8,6 +8,7 @@ import com.rekeningrijden.taxservice.repository.BasePriceRepository;
 import com.rekeningrijden.taxservice.util.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -47,8 +48,9 @@ public class BasePriceService implements BasePriceServiceable {
     }
 
     @Override
+    @Transactional
     public void deleteBasePriceByEngineType(String engineType) {
-        basePriceRepo.delete(ObjectMapperUtils.map(engineType, BasePrice.class));
+        basePriceRepo.deleteBasePriceByEngineType(engineType);
     }
 
 }
