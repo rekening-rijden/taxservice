@@ -1,5 +1,6 @@
 package com.rekeningrijden.taxservice.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -171,7 +172,7 @@ public class RabbitMQConfig {
 
     @Bean
     public MessageConverter converter(){
-        return new Jackson2JsonMessageConverter();
+        return new Jackson2JsonMessageConverter(new ObjectMapper().findAndRegisterModules());
     }
 
     @Bean

@@ -1,9 +1,12 @@
 package com.rekeningrijden.taxservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 
 public class BasePriceDto {
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING)
     private BigDecimal surTax;
     private String engineType;
 
