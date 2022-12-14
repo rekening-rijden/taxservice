@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UpdateProducer {
 
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
 
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
