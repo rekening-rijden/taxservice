@@ -56,9 +56,9 @@ public class RoadTaxController {
     }
 
     @DeleteMapping
-    public @ResponseBody ResponseEntity<String> deleteRoadTax(@RequestBody RoadTaxDto roadTaxDto){
+    public @ResponseBody ResponseEntity<String> deleteRoadTax(@RequestParam String roadType){
         try {
-            roadTaxService.deleteRoadTax(roadTaxDto);
+            roadTaxService.deleteRoadTaxByRoadType(roadType);
         }catch (Exception e){
             logger.error("Delete road tax encountered exception: " + e.getMessage());
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);

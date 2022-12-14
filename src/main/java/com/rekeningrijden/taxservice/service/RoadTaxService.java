@@ -47,7 +47,7 @@ public class RoadTaxService implements RoadTaxServiceable {
     }
 
     @Override
-    public void deleteRoadTax(RoadTaxDto roadTaxDto) {
-        roadTaxRepo.delete(ObjectMapperUtils.map(roadTaxDto, RoadTax.class));
+    public void deleteRoadTaxByRoadType(String engineType) {
+        roadTaxRepo.deleteRoadTaxByRoadType(engineType);
     }
 }

@@ -10,5 +10,5 @@ public interface RoadTaxServiceable {
     List<RoadTaxDto> getRoadTaxes();
     BigDecimal getSurTaxByRoadType(String roadType);
     RoadTaxDto updateRoadTax(RoadTaxDto roadTaxDto);
-    void deleteRoadTax(RoadTaxDto roadTaxDto);
+    void deleteRoadTaxByRoadType(String roadType);
 }
