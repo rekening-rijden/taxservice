@@ -1,13 +1,11 @@
 package com.rekeningrijden.taxservice.repository;
 
-import com.rekeningrijden.taxservice.dto.TimeTaxDto;
 import com.rekeningrijden.taxservice.entity.TimeTax;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 public interface TimeTaxRepository extends JpaRepository<TimeTax, Long> {
